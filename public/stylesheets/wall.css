@@ -1,0 +1,30 @@
+div.wall_post {
+	margin-top: 5px;
+	padding-top: 10px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #EEE;
+	margin-bottom: 5px;
+	padding-bottom: 10px;
+	width: 90%;
+}
+
+div.wall_post div.wall_post_name {
+	font-weight: bold;
+	font-size: 10pt;
+	margin-bottom: 2px;
+}
+
+div.wall_post div.wall_post_body {
+	
+	font-size: 10pt;
+	word-wrap: break-word;
+	margin-bottom:2px;
+	
+}
+
+.timeago {
+	font-size: 8pt;
+	font-style: italic;
+	color: #999;
+}
