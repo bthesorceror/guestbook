@@ -5,7 +5,9 @@ class WallController < ApplicationController
   
   def index
     @posts = WallPost.includes(:user).order("id desc").limit(10).all
-    session[:last_id] = @posts.first.id unless @posts.empty?
+    unless @posts.empty?
+      session[:last_id] = @posts.first.id 
+    end
   end
   
   def create
@@ -23,11 +25,15 @@ class WallController < ApplicationController
   
   def updates
     if session[:last_id]
-      @posts = WallPost.includes(:user).order("id desc").where("wall_posts.id > ?", session[:last_id])
+      @posts = WallPost.includes(:user).order("id desc").where("wall_posts.id > ?", session[:last_id].to_i)
     else
       @posts = WallPost.includes(:user).order("id desc").all
     end
-    session[:last_id] = @posts.first.id unless @posts.empty?
+    
+    unless @posts.empty?
+      session[:last_id] = @posts.first.id 
+    end
+    
     respond_to do |format|
       format.js {render :layout => nil}
     end

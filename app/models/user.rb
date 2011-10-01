@@ -32,12 +32,7 @@ class User < ActiveRecord::Base
     create! do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
-      
-      if auth["nickname"]
-        user.nick = auth["user_info"]["nickname"]
-      else
-        user.nick = auth["user_info"]["name"]
-      end
+      user.nick = auth["user_info"]["name"]
       
       if auth["user_info"]["image"]
         user.avatar_url = auth["user_info"]["image"]
