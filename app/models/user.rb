@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   
   def self.timeout 
-    15
+    5
   end
   
   has_many :wall_posts
