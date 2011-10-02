@@ -1,10 +1,8 @@
 $("#show_more_link").remove();
 <% @posts[:list].each do |post| %>
-	var item = $("<%=raw escape_javascript(render('post', :post => post)) %>");
-	$("#wall").append(item);
+	$("#wall").append("<%=raw escape_javascript(render('post', :post => post)) %>");
 <% end %>
 
 <% if @posts[:has_more] %>
-	var link = $("<a id='show_more_link' href='javascript:show_more(<%= @posts[:last_id] %>)'>Show More ...</a>')");
-	$("#wall").append(link);
+	$("#wall").append("<a id='show_more_link' href='javascript:show_more(<%= @posts[:last_id] %>)'>Show More ...</a>')");
 <% end %>

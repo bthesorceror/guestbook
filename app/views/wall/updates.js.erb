@@ -1,5 +1,4 @@
 <% @posts.each do |post| %>
-	var item = $("<%=raw escape_javascript(render('post', :post => post)) %>");
-	$("#wall").prepend(item);
+	$("#wall").prepend("<%=raw escape_javascript(render('post', :post => post)) %>");
 	$( "#post_<%= post.id %>" ).effect( 'highlight', {}, 2000);
 <% end %>
