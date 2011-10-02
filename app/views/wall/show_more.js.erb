@@ -6,5 +6,5 @@ $("#show_more_link").remove();
 
 <% if @posts[:has_more] %>
 	var link = $("<a id='show_more_link' href='show_more(<%= @posts[:last_id] %>)')");
-	$("#wall").append(link)
+	$("#wall").append(link);
 <% end %>
