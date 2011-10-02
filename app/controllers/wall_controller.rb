@@ -4,9 +4,9 @@ class WallController < ApplicationController
   before_filter :update_activity, :except => :updates
   
   def index
-    @posts = WallPost.includes(:user).order("id desc").limit(10).all
-    unless @posts.empty?
-      session[:last_id] = @posts.first.id 
+    @posts = WallPost.get_posts
+    unless @posts[:list].empty?
+      session[:last_id] = @posts[:list].first.id 
     end
   end
   
@@ -34,6 +34,14 @@ class WallController < ApplicationController
       session[:last_id] = @posts.first.id 
     end
     
+    respond_to do |format|
+      format.js {render :layout => nil}
+    end
+  end
+  
+  def show_more
+    id = params[:id]
+    @posts = WallPost.get_posts(id)
     respond_to do |format|
       format.js {render :layout => nil}
     end

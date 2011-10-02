@@ -1,8 +1,4 @@
 <% @posts.each do |post| %>
-	var list = $('#wall .wall_post').length;
-	if (list >= 10){
-	    $('#wall .wall_post:last-child').remove();
-	}
 	var item = $("<%=raw escape_javascript(render('post', :post => post)) %>");
 	$("#wall").prepend(item);
 	$( "#post_<%= post.id %>" ).effect( 'highlight', {}, 2000);

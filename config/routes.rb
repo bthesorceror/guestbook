@@ -14,6 +14,7 @@ Guestbook::Application.routes.draw do
   match "/updates" => "wall#updates", :as => :updates
   match "/update_users" => "wall#update_users", :as => :update_users
   match "/about" => "wall#about", :as => :about
+  match "/show_more" => "wall#show_more", :as => :show_more
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

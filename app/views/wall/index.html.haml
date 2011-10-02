@@ -7,6 +7,13 @@
 			});
 		}
 		
+		function show_more(id) {
+		  $.getScript("/show_more.js?id=" + id, function(data, textStatus){
+				$(".timeago").livequery(function () { $(this).timeago(); });
+				$(".alert-message").livequery(function () { $(this).fadeOut(5000)});
+			});
+		}
+		
 		function update_users() {
 			$.getScript("/update_users.js");
 		}
@@ -25,8 +32,11 @@
 				
 		%div
 			#wall
-				- @posts.each do |post| 
+				- @posts[:list].each do |post| 
 					=render("post", :post => post)
+				- if @posts[:has_more]
+					%a{:href => "javascript:show_more(#{@posts[:last_id]});", :id => "show_more_link"}
+						Show More ...
 	.span4
 		%h3
 			Online Users
