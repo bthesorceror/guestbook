@@ -1,6 +1,6 @@
 %script{:type => "text/javascript"}
 	:plain
-	  function after_update(data, textStatus) {
+		function after_update(data, textStatus) {
 			$(".timeago").livequery(function () { $(this).timeago(); });
 			$(".alert-message").livequery(function () { $(this).fadeOut(5000)});
 		}
