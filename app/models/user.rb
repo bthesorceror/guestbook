@@ -22,11 +22,11 @@ class User < ActiveRecord::Base
   end
   
   def timed_out
-    self.last_active_at != nil && self.last_login_at <= self.last_active_at && self.last_active_at < DateTime.now - User.timeout.minutes
+    self.last_active_at != nil && self.last_login_at <= self.last_active_at && self.last_active_at < User.timeout.minutes.ago
   end
   
   scope :current_users, where("(last_logout_at < last_active_at OR last_logout_at IS NULL) AND last_active_at > ?",
-                          User.timeout.minutes.ago).order("nick ASC")
+                          User.timeout.minutes.ago.to_s(:db)).order("nick ASC")
   
   def self.create_with_omniauth(auth)
     create! do |user|
