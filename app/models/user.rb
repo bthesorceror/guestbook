@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   end
   
   scope :current_users, where("(last_logout_at < last_active_at OR last_logout_at IS NULL) AND last_active_at > ?",
-                          (DateTime.now - User.timeout.minutes).to_datetime).order("nick ASC")
+                          User.timeout.minutes.ago).order("nick ASC")
   
   def self.create_with_omniauth(auth)
     create! do |user|
