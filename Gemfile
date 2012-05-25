@@ -11,6 +11,7 @@ gem "haml-rails"
 gem "jquery-rails"
 gem 'jbuilder'
 gem 'pry-rails'
+gem 'heroku'
 
 group :production do
   gem "pg"
