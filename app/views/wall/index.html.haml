@@ -1,43 +1,43 @@
-%script{:type => "text/javascript"}
-	:plain
-		function after_update(data, textStatus) {
-			$(".timeago").livequery(function () { $(this).timeago(); });
-			$(".alert-message").livequery(function () { $(this).fadeOut(5000)});
-		}
-	
-		function update() {
-		  $.getScript("/updates.js", after_update);
-		}
-		
-		function show_more(id) {
-		  $.getScript("/show_more.js?id=" + id, after_update);
-		}
-		
-		function update_users() {
-			$.getScript("/update_users.js");
-		}
-		
-		setInterval("update()", 25000);
-		setInterval("update_users()", 60000);
-.row
-	.span10
-		- if current_user
-			%div
-				=form_for(WallPost.new, :url => create_post_path) do |f|
-					%div
-						= f.text_area :body, :rows => 4, :cols => 20, :style => "width: 90%"
-					%div{:style=>"margin-top: 10px;"}
-						= f.submit "Post", :class => "btn primary"
-				
-		%div
-			#wall
-				- @posts[:list].each do |post| 
-					=render("post", :post => post)
-				- if @posts[:has_more]
-					%a{:href => "javascript:show_more(#{@posts[:last_id]});", :id => "show_more_link"}
-						Show More ...
-	.span4
-		%h3
-			Online Users
-		%div{:id=>"userlist"}
-			=render("users", :users => User.current_users)
+= javascript_include_tag("main")
+#about.page
+  .container
+    %h3 About Guest Book 2.0
+    %p
+      This is a project I started for two reasons. One was to see how many of the features in this app I could implement in one night. The
+      other is to be a dry run for a larger communications application I am currently designing which will incorporate a number of features
+      from this application.
+    %p
+      I have since rewrote this application to use the Knockout JS framework. That took more than one
+#main.page
+  .row
+    .span10
+      - if current_user
+        %div
+          %form
+            %div
+              %textarea.message{rows:4, cols:20, data: { bind: "value: message" }}
+            .form_actions
+              %button{type: "submit", class: "btn primary", data: { bind: "click: post_message" }}
+                Post Message
+
+      .scrollpane
+        #wall{data: { bind: "foreach: { data: posts, afterRender: after_post }" }}
+          .wall_post{data: { bind: "attr: {id: id}" }}
+            %img{data: { bind: "attr: {src: avatar_url}" }}
+            .details
+              .wall_post_name
+                %span{data: { bind: "text: name" }}
+                %small{data: { bind: "text: provider" }}
+              .wall_post_body{data: { bind: "text: message" }}
+              .wall_post_timestamp{ data:{  bind: "text: timestamp, attr: {title: timestamp}" }}
+    .span4
+      %h3
+        Online Users
+      #userlist
+        %ul.unstyled{data:{ bind: "foreach: users" }}
+          %li
+            %img{height: 30, width: 30, data: { bind: "attr: { src: avatar_url }" }}
+            .details
+              %span{ data: { bind: "text: name" }}
+              %p
+                %small{ data: { bind: "text: provider" }}

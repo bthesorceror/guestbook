@@ -43,3 +43,37 @@ border-left: 1px solid #eee;
 .topbar .btn {
 border: 0;
 }
+
+.scrollpane {
+  width: 100%;
+}
+
+form textarea.message {
+  width: 90%;
+}
+
+.form_actions {
+  margin-top: 10px;
+}
+
+.wall_post img {
+  float: left;
+  margin: 0 10px 0 0;
+}
+
+.wall_post .details {
+  overflow: hidden;
+}
+
+.wall_post .wall_post_name small {
+font-size:8pt;
+color:#999999; }
+
+#userlist li img {
+  float: left;
+  margin: 0 5px 0 0; }
+
+#userlist li .details { overflow: hidden: }
+
+.page { display: none; }
+#main { display: block; }
