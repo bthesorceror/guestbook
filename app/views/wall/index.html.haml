@@ -11,14 +11,13 @@
 #main.page
   .row
     .span10
-      - if current_user
-        %div
-          %form
-            %div
-              %textarea.message{rows:4, cols:20, data: { bind: "value: message" }}
-            .form_actions
-              %button{type: "submit", class: "btn primary", data: { bind: "click: post_message" }}
-                Post Message
+      %div{ data: { bind: "visible: logged_in" }}
+        %form
+          %div
+            %textarea.message{rows:4, cols:20, data: { bind: "value: message" }}
+          .form_actions
+            %button{type: "submit", class: "btn primary", data: { bind: "click: post_message" }}
+              Post Message
 
       .scrollpane
         #wall{data: { bind: "foreach: { data: posts, afterRender: after_post }" }}
